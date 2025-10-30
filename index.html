@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Daily Pulse — Track Your Emotions, Understand Yourself</title>
+        <meta
+            name="description"
+            content="Daily Pulse is a beautiful mood journal. Track emotions, add notes, and see patterns over time with privacy-first syncing."
+        />
+        <meta name="theme-color" content="#6d6ef6" />
+        <meta
+            property="og:title"
+            content="Daily Pulse — Track Your Emotions, Understand Yourself"
+        />
+        <meta
+            property="og:description"
+            content="A beautiful, private mood journal with insights and charts."
+        />
+        <meta property="og:type" content="website" />
+        <style>
+            :root {
+                --bg: #0f1221;
+                --muted: #aab0d5;
+                --card: rgba(255, 255, 255, 0.06);
+                --border: rgba(255, 255, 255, 0.12);
+                --text: #f5f7ff;
+                --accent: #6d6ef6;
+                --accent-2: #a770ef;
+                --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    "Helvetica Neue",
+                    Arial;
+                background: radial-gradient(
+                    1200px 800px at 10% -10%,
+                    #1b2340 0%,
+                    #0f1221 40%,
+                    #0b0d18 100%
+                );
+                color: var(--text);
+            }
+            a {
+                color: var(--accent);
+                text-decoration: none;
+            }
+            .container {
+                width: min(1120px, 92vw);
+                margin: 0 auto;
+            }
+            /* Header */
+            header {
+                position: sticky;
+                top: 0;
+                backdrop-filter: blur(12px);
+                background: linear-gradient(
+                    180deg,
+                    rgba(15, 18, 33, 0.75) 0%,
+                    rgba(15, 18, 33, 0.35) 100%
+                );
+                border-bottom: 1px solid var(--border);
+                z-index: 50;
+            }
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 24px;
+                padding: 14px 0;
+            }
+            .nav .links {
+                align-items: center;
+            }
+            .brand {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                font-weight: 700;
+                letter-spacing: 0.2px;
+            }
+            .brand .logo-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    circle at 30% 30%,
+                    #fff,
+                    var(--accent)
+                );
+                box-shadow: 0 0 24px var(--accent);
+            }
+            .nav a.btn {
+                padding: 10px 16px;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                color: var(--text);
+                display: inline-flex;
+                gap: 8px;
+                align-items: center;
+            }
+            .nav a.btn:hover {
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+            /* Hero */
+            .hero {
+                padding: 72px 0 40px;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero h1 {
+                font-size: clamp(28px, 4vw, 52px);
+                line-height: 1.05;
+                margin: 18px 0 14px;
+            }
+            .hero p.sub {
+                color: var(--muted);
+                font-size: clamp(16px, 2.2vw, 19px);
+            }
+            .cta {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                margin-top: 24px;
+            }
+            .btn-primary {
+                background: linear-gradient(
+                    90deg,
+                    var(--accent),
+                    var(--accent-2)
+                );
+                border: none;
+                color: white;
+                padding: 14px 18px;
+                border-radius: 14px;
+                font-weight: 700;
+                box-shadow: 0 10px 30px rgba(109, 110, 246, 0.35);
+            }
+            .btn-ghost {
+                padding: 14px 18px;
+                border-radius: 14px;
+                border: 1px solid var(--border);
+                color: var(--text);
+                background: transparent;
+            }
+            .hero-card {
+                margin-top: 36px;
+                background: linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.06),
+                    rgba(255, 255, 255, 0.03)
+                );
+                border: 1px solid var(--border);
+                border-radius: 22px;
+                padding: 18px;
+                box-shadow: var(--shadow);
+            }
+            .shots-row {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 16px;
+            }
+            .shot {
+                background: #0a0d1a;
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .shot img {
+                width: 100%;
+                height: auto;
+                border-radius: 12px;
+                display: block;
+            }
+            /* Features */
+            .section {
+                padding: 64px 0;
+            }
+            .section h2 {
+                font-size: clamp(22px, 3vw, 36px);
+                margin: 0 0 10px;
+            }
+            .section p.lead {
+                color: var(--muted);
+                max-width: 720px;
+            }
+            .grid-3 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 18px;
+                margin-top: 28px;
+            }
+            .card {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 18px;
+            }
+            .card h3 {
+                margin: 8px 0 6px;
+                font-size: 18px;
+            }
+            .card p {
+                color: var(--muted);
+                font-size: 14.5px;
+            }
+            /* Gallery tabs */
+            .tabs {
+                display: flex;
+                gap: 10px;
+                margin: 18px 0 10px;
+                flex-wrap: wrap;
+            }
+            .tabs button {
+                padding: 10px 14px;
+                border-radius: 12px;
+                background: #0a0d1a;
+                border: 1px solid var(--border);
+                color: var(--text);
+                cursor: pointer;
+            }
+            .tabs button.active {
+                background: linear-gradient(
+                    90deg,
+                    var(--accent),
+                    var(--accent-2)
+                );
+                border: none;
+            }
+            .gallery {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 16px;
+                margin-top: 14px;
+            }
+            .gallery .shot {
+                aspect-ratio: 9/19;
+            }
+            /* FAQ */
+            details {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                padding: 12px 14px;
+            }
+            details + details {
+                margin-top: 10px;
+            }
+            summary {
+                cursor: pointer;
+                font-weight: 600;
+            }
+            summary::marker {
+                color: var(--accent);
+            }
+            /* Footer */
+            footer {
+                border-top: 1px solid var(--border);
+                padding: 28px 0 60px;
+                color: var(--muted);
+            }
+            .foot-row {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+            .links {
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+            /* Responsive helpers */
+            @media (max-width: 640px) {
+                .shots-row {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="container nav">
+                <div class="brand">
+                    <span class="logo-dot"></span>
+                    <span>Daily Pulse</span>
+                </div>
+                <nav class="links">
+                    <a href="#features">Features</a>
+                    <a href="#screens">Screens</a>
+                    <a href="privacy-policy.html">Privacy</a>
+                    <a class="btn" href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <div>
+                        <span
+                            style="
+                                display: inline-flex;
+                                gap: 8px;
+                                align-items: center;
+                                padding: 6px 10px;
+                                border: 1px solid var(--border);
+                                border-radius: 999px;
+                                color: var(--muted);
+                                font-size: 12px;
+                            "
+                        >
+                            <span>✨ New</span
+                            ><span
+                                >Dark & Light UI • Updated October 30,
+                                2025</span
+                            >
+                        </span>
+                        <h1>
+                            Track your moods. Spot the patterns. Grow with
+                            clarity.
+                        </h1>
+                        <p class="sub">
+                            Daily Pulse is your private mood journal with notes,
+                            insights, and beautiful charts—designed to be
+                            effortless and respectful of your data.
+                        </p>
+                        <div class="cta">
+                            <!-- Replace the # with your actual Play Store link -->
+                            <a
+                                class="btn-primary"
+                                href="#"
+                                aria-label="Download on Google Play"
+                                >📱 Get it on Google Play</a
+                            >
+                            <a class="btn-ghost" href="#screens">See the UI</a>
+                        </div>
+                        <div class="hero-card" aria-label="App screenshots">
+                            <div class="shots-row">
+                                <div class="shot">
+                                    <img
+                                        loading="lazy"
+                                        src="assets/dark_home.png"
+                                        alt="Daily Pulse — Home (Dark)"
+                                    />
+                                </div>
+                                <div class="shot">
+                                    <img
+                                        loading="lazy"
+                                        src="assets/dark_insights.png"
+                                        alt="Daily Pulse — Insights (Dark)"
+                                    />
+                                </div>
+                                <div class="shot">
+                                    <img
+                                        loading="lazy"
+                                        src="assets/light_home.png"
+                                        alt="Daily Pulse — Home (Light)"
+                                    />
+                                </div>
+                                <div class="shot">
+                                    <img
+                                        loading="lazy"
+                                        src="assets/light_insights.png"
+                                        alt="Daily Pulse — Insights (Light)"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="section">
+                <div class="container">
+                    <h2>Built for everyday reflection</h2>
+                    <p class="lead">
+                        Fast mood logging, thoughtful notes, and insights that
+                        actually help. No clutter, no ads, and your data stays
+                        yours.
+                    </p>
+                    <div class="grid-3">
+                        <div class="card">
+                            <h3>Emoji-first logging</h3>
+                            <p>
+                                Capture your mood in seconds. Add context with
+                                tags and notes so patterns make sense later.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>Beautiful charts</h3>
+                            <p>
+                                See weekly and monthly trends, best days, and
+                                variance to understand your emotional rhythm.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>Private & secure</h3>
+                            <p>
+                                Authentication via Firebase, encrypted sync via
+                                Firestore, and optional offline via Hive.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>Insights that matter</h3>
+                            <p>
+                                Automatic highlights surface streaks, dips, and
+                                correlations—helpful, not noisy.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>Notes you’ll revisit</h3>
+                            <p>
+                                Attach quick notes to any mood entry and filter
+                                your history by tags or date.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>No dark-patterns</h3>
+                            <p>
+                                No ads, no tracking across apps. Just you and
+                                your data with clear export & delete options.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screens" class="section">
+                <div class="container">
+                    <h2>App Screens</h2>
+                    <div class="tabs" role="tablist" aria-label="Theme filter">
+                        <button
+                            class="active"
+                            data-filter="all"
+                            role="tab"
+                            aria-selected="true"
+                        >
+                            All
+                        </button>
+                        <button
+                            data-filter="light"
+                            role="tab"
+                            aria-selected="false"
+                        >
+                            Light
+                        </button>
+                        <button
+                            data-filter="dark"
+                            role="tab"
+                            aria-selected="false"
+                        >
+                            Dark
+                        </button>
+                    </div>
+
+                    <div class="gallery" id="gallery">
+                        <!-- Light -->
+                        <div class="shot" data-theme="light">
+                            <img
+                                loading="lazy"
+                                src="assets/light_home.png"
+                                alt="Home — Light"
+                            />
+                        </div>
+                        <div class="shot" data-theme="light">
+                            <img
+                                loading="lazy"
+                                src="assets/light_insights.png"
+                                alt="Insights — Light"
+                            />
+                        </div>
+                        <div class="shot" data-theme="light">
+                            <img
+                                loading="lazy"
+                                src="assets/light_histroy.png"
+                                alt="History — Light"
+                            />
+                        </div>
+                        <div class="shot" data-theme="light">
+                            <img
+                                loading="lazy"
+                                src="assets/light_notes.png"
+                                alt="Notes — Light"
+                            />
+                        </div>
+                        <div class="shot" data-theme="light">
+                            <img
+                                loading="lazy"
+                                src="assets/light_sign_in.png"
+                                alt="Sign In — Light"
+                            />
+                        </div>
+                        <div class="shot" data-theme="light">
+                            <img
+                                loading="lazy"
+                                src="assets/light_sign_up.png"
+                                alt="Sign Up — Light"
+                            />
+                        </div>
+                        <!-- Dark -->
+                        <div class="shot" data-theme="dark">
+                            <img
+                                loading="lazy"
+                                src="assets/dark_home.png"
+                                alt="Home — Dark"
+                            />
+                        </div>
+                        <div class="shot" data-theme="dark">
+                            <img
+                                loading="lazy"
+                                src="assets/dark_insights.png"
+                                alt="Insights — Dark"
+                            />
+                        </div>
+                        <div class="shot" data-theme="dark">
+                            <img
+                                loading="lazy"
+                                src="assets/dark_histroy.png"
+                                alt="History — Dark"
+                            />
+                        </div>
+                        <div class="shot" data-theme="dark">
+                            <img
+                                loading="lazy"
+                                src="assets/dark_setting.png"
+                                alt="Settings — Dark"
+                            />
+                        </div>
+                        <div class="shot" data-theme="dark">
+                            <img
+                                loading="lazy"
+                                src="assets/dark_sign_in.png"
+                                alt="Sign In — Dark"
+                            />
+                        </div>
+                        <div class="shot" data-theme="dark">
+                            <img
+                                loading="lazy"
+                                src="assets/dark_sign_up.png"
+                                alt="Sign Up — Dark"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <h2>FAQs</h2>
+                    <details>
+                        <summary>Is my data private?</summary>
+                        <p>
+                            Yes. Your mood data belongs to you. We use Firebase
+                            Auth and Firestore for secure sync, and you can
+                            export or delete data anytime.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Is there an offline mode?</summary>
+                        <p>
+                            Yes. Daily Pulse works offline using local storage.
+                            Your entries sync when you're back online.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Can I switch themes?</summary>
+                        <p>
+                            Absolutely. System theme is respected and you can
+                            choose Light or Dark manually in Settings.
+                        </p>
+                    </details>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container foot-row">
+                <div>© 2025 Daily Pulse • A ScanFlow Studio product</div>
+                <div class="links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // Filter gallery by theme
+            const tabs = document.querySelectorAll(".tabs button");
+            const shots = document.querySelectorAll("#gallery .shot");
+            tabs.forEach((btn) =>
+                btn.addEventListener("click", () => {
+                    tabs.forEach((b) => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    const f = btn.dataset.filter;
+                    shots.forEach((s) => {
+                        s.style.display =
+                            f === "all" || s.dataset.theme === f ? "" : "none";
+                    });
+                }),
+            );
+        </script>
+    </body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Contact — Daily Pulse</title>
+        <meta
+            name="description"
+            content="Contact information for Daily Pulse."
+        />
+        <meta name="theme-color" content="#6d6ef6" />
+        <style>
+            :root {
+                --bg: #0f1221;
+                --muted: #aab0d5;
+                --card: rgba(255, 255, 255, 0.06);
+                --border: rgba(255, 255, 255, 0.12);
+                --text: #f5f7ff;
+                --accent: #6d6ef6;
+                --accent-2: #a770ef;
+                --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    "Helvetica Neue",
+                    Arial;
+                background: radial-gradient(
+                    1200px 800px at 10% -10%,
+                    #1b2340 0%,
+                    #0f1221 40%,
+                    #0b0d18 100%
+                );
+                color: var(--text);
+            }
+            a {
+                color: var(--accent);
+                text-decoration: none;
+            }
+            .container {
+                width: min(1120px, 92vw);
+                margin: 0 auto;
+            }
+            /* Header */
+            header {
+                position: sticky;
+                top: 0;
+                backdrop-filter: blur(12px);
+                background: linear-gradient(
+                    180deg,
+                    rgba(15, 18, 33, 0.75) 0%,
+                    rgba(15, 18, 33, 0.35) 100%
+                );
+                border-bottom: 1px solid var(--border);
+                z-index: 50;
+            }
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 24px;
+                padding: 14px 0;
+            }
+            .nav .links {
+                align-items: center;
+            }
+            .brand {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                font-weight: 700;
+                letter-spacing: 0.2px;
+            }
+            .brand .logo-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    circle at 30% 30%,
+                    #fff,
+                    var(--accent)
+                );
+                box-shadow: 0 0 24px var(--accent);
+            }
+            .nav a.btn {
+                padding: 10px 16px;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                color: var(--text);
+                display: inline-flex;
+                gap: 8px;
+                align-items: center;
+            }
+            .nav a.btn:hover {
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+            /* Footer */
+            footer {
+                border-top: 1px solid var(--border);
+                padding: 28px 0 60px;
+                color: var(--muted);
+            }
+            .foot-row {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+            .links {
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+            main {
+                padding: 72px 0;
+            }
+            .cta-card {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 2rem;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .cta-card h3 {
+                margin: 0 0 0.5rem;
+                font-size: 1.5rem;
+            }
+            .cta-card p {
+                color: var(--muted);
+                margin: 0 0 2rem;
+            }
+            .metrics {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .metrics li + li {
+                margin-top: 1rem;
+            }
+            .metrics li a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                padding: 1.25rem 1.5rem;
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                background: rgba(0, 0, 0, 0.1);
+            }
+            .metrics li a:hover {
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+            .metrics .value {
+                font-weight: 600;
+                font-size: 1.05rem;
+                color: var(--text);
+            }
+            .metrics .label {
+                text-align: right;
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+            .metrics .label span {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="container nav">
+                <div class="brand">
+                    <span class="logo-dot"></span>
+                    <span>Daily Pulse</span>
+                </div>
+                <nav class="links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#features">Features</a>
+                    <a href="index.html#screens">Screens</a>
+                    <a href="privacy-policy.html">Privacy</a>
+                    <a class="btn" href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <aside class="cta-card">
+                    <h3>Direct lines</h3>
+                    <p>
+                        Pick the route that works best. We answer every request
+                        personally.
+                    </p>
+                    <ul class="metrics">
+                        <li>
+                            <a href="mailto:scanflowstudios.dev@gmail.com">
+                                <span class="value"
+                                    >scanflowstudios.dev@gmail.com</span
+                                >
+                                <span class="label">
+                                    <span>Email desk</span>
+                                    <span>24/7</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://instagram.com/i_m_rohit_chanaliya"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <span class="value">@i_m_rohit_chanaliya</span>
+                                <span class="label">
+                                    <span>DMs on X / Instagram</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+919760320892">
+                                <span class="value">+91 9760320892</span>
+                                <span class="label">
+                                    <span>Weekdays &ndash; 9am&ndash;5pm</span>
+                                    <span>PT</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container foot-row">
+                <div>© 2025 Daily Pulse • A ScanFlow Studio product</div>
+                <div class="links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
